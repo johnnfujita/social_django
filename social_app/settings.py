@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django.urls import reverse_lazy
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +36,7 @@ ALLOWED_HOSTS = ['microappollis.com',  '127.0.0.1', 'localhost' ]
 # Application definition
 
 INSTALLED_APPS = [
+    'actions.apps.ActionsConfig',
     'easy_thumbnails',
     'images.apps.ImagesConfig',
     'social_django',
@@ -156,3 +162,8 @@ SOCIAL_AUTH_TWITTER_SECRET  = os.getenv('SOCIAL_AUTH_TWITTER_SECRET')
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0

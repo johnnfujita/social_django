@@ -8,7 +8,7 @@ from django.utils.text import slugify
 class ImageCreateForm(forms.ModelForm):
     def clean_url(self):
         url = self.cleaned_data['url']
-        valid_extensions = ['jpg', 'png', 'jpeg']
+        valid_extensions = ['jpg', 'jpeg']
         extension = url.rsplit('.', 1)[1].lower()
         if extension not in valid_extensions:
             raise forms.ValidationsError('The given URL does not match a valid image extension.')
